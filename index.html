@@ -48,15 +48,15 @@ h1{
   margin:30px 0 34px;
   font-size:1.55rem;
   font-weight:700;
-  min-height:60px; /* Prevent jump when text changes */
+  min-height:60px; /* prevent jump */
 }
 
 /* BUTTONS */
 .buttons{
   display:flex;
+  justify-content:center;
   gap:20px;
   flex-wrap:wrap;
-  justify-content:center;
   margin-bottom:20px;
 }
 
@@ -202,8 +202,9 @@ noBtn.onclick=()=>{
     noBtn.textContent=pleas[step];
     step++;
   }else if(step<pleas.length+3){
-    let scale = 1-(step-pleas.length)*0.15;
-    noBtn.style.transform=`scale(${scale})`;
+    // playful shrink and wiggle
+    let scale = Math.max(0.5, 1 - (step-pleas.length)*0.1);
+    noBtn.style.transform = `scale(${scale}) rotate(${(step-pleas.length)*10}deg)`;
     step++;
   }else{
     accept();
