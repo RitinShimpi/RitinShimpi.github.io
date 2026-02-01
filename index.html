@@ -20,8 +20,8 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  color:var(--lav);
   padding:20px;
+  color:var(--lav);
 }
 
 /* CARD */
@@ -33,9 +33,6 @@ body{
   border:2px solid rgba(123,97,255,.35);
   background:rgba(255,255,255,.18);
   text-align:center;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
 }
 
 /* TEXT */
@@ -48,27 +45,29 @@ h1{
   margin:30px 0 34px;
   font-size:1.55rem;
   font-weight:700;
-  min-height:60px;
+  min-height:64px;
 }
 
-/* BUTTONS */
+/* BUTTONS — HARD FIX */
 .buttons{
   display:flex;
-  justify-content:center;
-  gap:20px;
-  flex-wrap:nowrap; /* keep side by side always */
-  margin-bottom:20px;
+  gap:14px;
+  justify-content:space-between;
 }
 
 button{
-  padding:14px 26px;
+  flex:1;                 /* equal width */
+  min-width:0;            /* critical: prevents overflow */
+  padding:14px 16px;
   border-radius:999px;
   border:none;
-  font-size:1.05rem;
+  font-size:1rem;
   font-weight:700;
   cursor:pointer;
-  white-space:nowrap;
-  transition: all 0.3s ease;
+  line-height:1.2;
+  white-space:normal;     /* allow text wrap INSIDE */
+  text-align:center;
+  transition:background .3s;
 }
 
 .yes{
@@ -83,12 +82,30 @@ button{
 }
 
 /* IMAGE */
-img{
-  width:100%;
-  border-radius:22px;
-  margin-top:24px;
+#mainImg{
   display:none;
+  width:100%;
+  margin-top:24px;
+  border-radius:22px;
   box-shadow:0 16px 35px rgba(0,0,0,.25);
+}
+
+/* SECRET */
+.secret{
+  display:none;
+  margin-top:18px;
+  font-size:.9rem;
+  text-decoration:underline;
+  cursor:pointer;
+}
+
+/* LETTER */
+.letter{
+  display:none;
+  margin-top:20px;
+  font-size:1.05rem;
+  line-height:1.7;
+  text-align:left;
 }
 
 /* POLAROIDS */
@@ -108,31 +125,9 @@ img{
   box-shadow:0 12px 25px rgba(0,0,0,.25);
 }
 
-.polaroid:first-child{transform:rotate(-6deg)}
-.polaroid:last-child{transform:rotate(6deg)}
-
 .polaroid img{
   width:100%;
   border-radius:4px;
-}
-
-/* LETTER */
-.letter{
-  display:none;
-  margin-top:20px;
-  font-size:1.05rem;
-  line-height:1.7;
-  text-align:left;
-  width:100%;
-}
-
-/* SECRET */
-.secret{
-  display:none;
-  margin-top:18px;
-  font-size:.9rem;
-  text-decoration:underline;
-  cursor:pointer;
 }
 </style>
 </head>
@@ -195,33 +190,24 @@ const pleas = [
 
 let step = 0;
 
-/* NAHH FLOW */
 noBtn.onclick = () => {
   if(step < pleas.length){
     noBtn.textContent = pleas[step];
-    step++;
-  } else if(step < pleas.length + 3){
-    // shrink & rotate playful effect
-    let scale = Math.max(0.5, 1 - (step-pleas.length)*0.1);
-    noBtn.style.transform = `scale(${scale}) rotate(${(step-pleas.length)*10}deg)`;
     step++;
   } else {
     accept();
   }
 };
 
-/* YES */
 yesBtn.onclick = accept;
 
 function accept(){
   question.textContent = "Thank you for choosing me 💛";
   img.style.display = "block";
   secret.style.display = "block";
-  noBtn.style.display = "none";
-  yesBtn.style.display = "none";
+  document.querySelector(".buttons").style.display = "none";
 }
 
-/* SECRET */
 secret.onclick = () => {
   letter.style.display = "block";
   polaroids.style.display = "flex";
@@ -231,4 +217,3 @@ secret.onclick = () => {
 
 </body>
 </html>
-
