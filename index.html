@@ -16,11 +16,12 @@
 body{
   background:var(--yellow);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  height:100vh;
+  min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
   color:var(--lav);
+  padding:20px;
 }
 
 /* CARD */
@@ -32,6 +33,9 @@ body{
   border:2px solid rgba(123,97,255,.35);
   background:rgba(255,255,255,.18);
   text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 
 /* TEXT */
@@ -44,12 +48,16 @@ h1{
   margin:30px 0 34px;
   font-size:1.55rem;
   font-weight:700;
+  min-height:60px; /* Prevent jump when text changes */
 }
 
 /* BUTTONS */
 .buttons{
-  position:relative;
-  height:90px;
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-bottom:20px;
 }
 
 button{
@@ -59,6 +67,8 @@ button{
   font-size:1.05rem;
   font-weight:700;
   cursor:pointer;
+  white-space:nowrap;
+  transition: all 0.3s ease;
 }
 
 .yes{
@@ -67,13 +77,9 @@ button{
 }
 
 .no{
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
   background:transparent;
   border:2px solid var(--lav);
   color:var(--lav);
-  transition:.3s;
 }
 
 /* IMAGE */
@@ -92,6 +98,7 @@ img{
   display:flex;
   justify-content:center;
   gap:14px;
+  flex-wrap:wrap;
 }
 
 .polaroid{
@@ -116,6 +123,8 @@ img{
   margin-top:20px;
   font-size:1.05rem;
   line-height:1.7;
+  text-align:left;
+  width:100%;
 }
 
 /* SECRET */
@@ -193,7 +202,8 @@ noBtn.onclick=()=>{
     noBtn.textContent=pleas[step];
     step++;
   }else if(step<pleas.length+3){
-    noBtn.style.transform=`translateX(-50%) scale(${1-(step-pleas.length)*0.15})`;
+    let scale = 1-(step-pleas.length)*0.15;
+    noBtn.style.transform=`scale(${scale})`;
     step++;
   }else{
     accept();
