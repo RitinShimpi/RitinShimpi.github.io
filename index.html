@@ -11,62 +11,45 @@
   --lav:#7B61FF;
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
   background:var(--yellow);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   height:100vh;
-  overflow:hidden;
-  color:var(--lav);
-}
-
-/* LAYOUT */
-.screen{
-  position:fixed;
-  inset:0;
   display:flex;
   justify-content:center;
   align-items:center;
-  padding:20px;
+  color:var(--lav);
 }
 
+/* CARD */
 .card{
   width:100%;
   max-width:420px;
-  padding:34px 26px 40px;
-  border-radius:30px;
+  padding:36px 26px 40px;
+  border-radius:28px;
   border:2px solid rgba(123,97,255,.35);
-  background:rgba(255,255,255,.15);
-  backdrop-filter:blur(6px);
+  background:rgba(255,255,255,.18);
   text-align:center;
 }
 
 /* TEXT */
 h1{
-  font-size:2.2rem;
+  font-size:2.1rem;
   font-weight:800;
 }
 
-.sub{
-  font-size:.95rem;
-  margin-top:6px;
-}
-
-.q{
-  margin:32px 0 26px;
+.question{
+  margin:30px 0 34px;
   font-size:1.55rem;
   font-weight:700;
 }
 
 /* BUTTONS */
-.btns{
+.buttons{
   position:relative;
-  height:110px;
+  height:90px;
 }
 
 button{
@@ -79,21 +62,13 @@ button{
 }
 
 .yes{
-  background:linear-gradient(135deg,#FFF,#E6D9FF);
-  color:var(--lav);
-}
-
-.tease{
-  margin-top:14px;
-  background:transparent;
-  border:2px dashed var(--lav);
+  background:white;
   color:var(--lav);
 }
 
 .no{
   position:absolute;
   left:50%;
-  top:0;
   transform:translateX(-50%);
   background:transparent;
   border:2px solid var(--lav);
@@ -101,38 +76,34 @@ button{
   transition:.3s;
 }
 
-/* PHOTOS */
-.gallery{
-  display:none;
-  margin-top:24px;
-}
-
-.main-photo{
+/* IMAGE */
+img{
   width:100%;
   border-radius:22px;
-  box-shadow:0 18px 40px rgba(0,0,0,.25);
+  margin-top:24px;
+  display:none;
+  box-shadow:0 16px 35px rgba(0,0,0,.25);
 }
 
 /* POLAROIDS */
 .polaroids{
+  display:none;
+  margin-top:20px;
   display:flex;
   justify-content:center;
   gap:14px;
-  margin-top:18px;
 }
 
 .polaroid{
   width:120px;
-  background:#fff;
+  background:white;
   padding:8px 8px 18px;
   border-radius:8px;
   box-shadow:0 12px 25px rgba(0,0,0,.25);
-  transform:rotate(-6deg);
 }
 
-.polaroid:last-child{
-  transform:rotate(6deg);
-}
+.polaroid:first-child{transform:rotate(-6deg)}
+.polaroid:last-child{transform:rotate(6deg)}
 
 .polaroid img{
   width:100%;
@@ -142,125 +113,110 @@ button{
 /* LETTER */
 .letter{
   display:none;
-  margin-top:22px;
+  margin-top:20px;
   font-size:1.05rem;
   line-height:1.7;
 }
 
-/* FLOAT */
-.float{
-  position:absolute;
-  bottom:-20px;
-  animation:rise 4s linear forwards;
-  font-size:1.4rem;
-}
-@keyframes rise{
-  to{transform:translateY(-120vh);opacity:0;}
+/* SECRET */
+.secret{
+  display:none;
+  margin-top:18px;
+  font-size:.9rem;
+  text-decoration:underline;
+  cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<div class="screen">
-  <div class="card">
+<div class="card">
 
-    <h1>Minnie ✨</h1>
-    <div class="sub">Hey Kanda… ek sawaal hai 😌</div>
+  <h1>Minnie ✨</h1>
 
-    <div class="q">
-      Kya mujhse shadi karogi Minnu?
-    </div>
-
-    <div class="btns">
-      <button class="yes" id="yesBtn">Haan 💛</button><br>
-      <button class="tease" id="teaseBtn">Aise kaise 😉💍</button>
-      <button class="no" id="noBtn">Nahh 😏</button>
-    </div>
-
-    <div class="gallery" id="gallery">
-      <img src="minnie1.jpeg" class="main-photo">
-
-      <div class="polaroids">
-        <div class="polaroid">
-          <img src="minnie2.jpg">
-        </div>
-        <div class="polaroid">
-          <img src="minnie3.jpg">
-        </div>
-      </div>
-    </div>
-
-    <div class="letter" id="letter">
-      Minnie,<br><br>
-      Thoda bhaav khaana allowed hai,<br>
-      par zindagi saath jeeni hai 💛<br><br>
-
-      I don’t want perfect days.<br>
-      I want *you* on all days.<br><br>
-
-      Hamesha tumhara,<br>
-      ❤️
-    </div>
-
+  <div class="question" id="question">
+    Kya mujhse shadi karogi Minnu?
   </div>
+
+  <div class="buttons">
+    <button class="yes" id="yesBtn">Haan 💛</button>
+    <button class="no" id="noBtn">Nahh 😏</button>
+  </div>
+
+  <img src="minnie1.jpeg" id="mainImg">
+
+  <div class="secret" id="secretBtn">
+    tap for something secret 🤍
+  </div>
+
+  <div class="letter" id="letter">
+    Minnie,<br><br>
+    Yeh sirf ek sawaal nahi tha.<br>
+    Yeh mera vaada hai.<br><br>
+    Tumhare saath har din chuna hai maine 💛
+  </div>
+
+  <div class="polaroids" id="polaroids">
+    <div class="polaroid">
+      <img src="minnie2.jpg">
+    </div>
+    <div class="polaroid">
+      <img src="minnie3.jpg">
+    </div>
+  </div>
+
 </div>
 
 <script>
 const noBtn=document.getElementById("noBtn");
 const yesBtn=document.getElementById("yesBtn");
-const teaseBtn=document.getElementById("teaseBtn");
-const gallery=document.getElementById("gallery");
+const question=document.getElementById("question");
+const img=document.getElementById("mainImg");
+const secret=document.getElementById("secretBtn");
 const letter=document.getElementById("letter");
+const polaroids=document.getElementById("polaroids");
 
-let moves=0;
+const pleas=[
+  "Aise kaise 😳",
+  "Please bangaru 🥺",
+  "Minnuuu 💛",
+  "Sohnaaa please 😭",
+  "Chup chaap maan jaa 😌"
+];
 
-/* NAHH BEHAVIOR */
+let step=0;
+
+/* NAHH FLOW */
 noBtn.onclick=()=>{
-  moves++;
-  if(moves<6){
-    noBtn.style.transform=
-      `translate(${Math.random()*180-90}px,${Math.random()*120-60}px)`;
-  }else if(moves<9){
-    noBtn.style.transform="translateX(-50%) scale(.6)";
+  if(step<pleas.length){
+    noBtn.textContent=pleas[step];
+    step++;
+  }else if(step<pleas.length+3){
+    noBtn.style.transform=`translateX(-50%) scale(${1-(step-pleas.length)*0.15})`;
+    step++;
   }else{
-    noBtn.textContent="Haan 😳";
-    noBtn.className="yes";
-    noBtn.onclick=accept;
+    accept();
   }
-};
-
-/* AISE KAISE */
-teaseBtn.onclick=()=>{
-  teaseBtn.textContent="Thoda bhaav toh khaana padega 😌";
-  setTimeout(()=>{
-    teaseBtn.textContent="Aise kaise 😉💍";
-  },2000);
 };
 
 /* YES */
 yesBtn.onclick=accept;
 
 function accept(){
-  gallery.style.display="block";
-  letter.style.display="block";
-  float();
+  question.textContent="Thank you for choosing me 💛";
+  img.style.display="block";
+  secret.style.display="block";
+  noBtn.style.display="none";
+  yesBtn.style.display="none";
 }
 
-/* FLOATING */
-function float(){
-  const e=["💛","💜","😏","💍"];
-  for(let i=0;i<16;i++){
-    setTimeout(()=>{
-      const d=document.createElement("div");
-      d.className="float";
-      d.textContent=e[Math.floor(Math.random()*e.length)];
-      d.style.left=Math.random()*100+"vw";
-      document.body.appendChild(d);
-      setTimeout(()=>d.remove(),4000);
-    },i*150);
-  }
-}
+/* SECRET */
+secret.onclick=()=>{
+  letter.style.display="block";
+  polaroids.style.display="flex";
+  secret.style.display="none";
+};
 </script>
 
 </body>
