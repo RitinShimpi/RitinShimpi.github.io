@@ -48,7 +48,7 @@ h1{
   margin:30px 0 34px;
   font-size:1.55rem;
   font-weight:700;
-  min-height:60px; /* prevent jump */
+  min-height:60px;
 }
 
 /* BUTTONS */
@@ -56,7 +56,7 @@ h1{
   display:flex;
   justify-content:center;
   gap:20px;
-  flex-wrap:wrap;
+  flex-wrap:nowrap; /* keep side by side always */
   margin-bottom:20px;
 }
 
@@ -98,7 +98,6 @@ img{
   display:flex;
   justify-content:center;
   gap:14px;
-  flex-wrap:wrap;
 }
 
 .polaroid{
@@ -178,15 +177,15 @@ img{
 </div>
 
 <script>
-const noBtn=document.getElementById("noBtn");
-const yesBtn=document.getElementById("yesBtn");
-const question=document.getElementById("question");
-const img=document.getElementById("mainImg");
-const secret=document.getElementById("secretBtn");
-const letter=document.getElementById("letter");
-const polaroids=document.getElementById("polaroids");
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const question = document.getElementById("question");
+const img = document.getElementById("mainImg");
+const secret = document.getElementById("secretBtn");
+const letter = document.getElementById("letter");
+const polaroids = document.getElementById("polaroids");
 
-const pleas=[
+const pleas = [
   "Aise kaise 😳",
   "Please bangaru 🥺",
   "Minnuuu 💛",
@@ -194,39 +193,39 @@ const pleas=[
   "Chup chaap maan jaa 😌"
 ];
 
-let step=0;
+let step = 0;
 
 /* NAHH FLOW */
-noBtn.onclick=()=>{
-  if(step<pleas.length){
-    noBtn.textContent=pleas[step];
+noBtn.onclick = () => {
+  if(step < pleas.length){
+    noBtn.textContent = pleas[step];
     step++;
-  }else if(step<pleas.length+3){
-    // playful shrink and wiggle
+  } else if(step < pleas.length + 3){
+    // shrink & rotate playful effect
     let scale = Math.max(0.5, 1 - (step-pleas.length)*0.1);
     noBtn.style.transform = `scale(${scale}) rotate(${(step-pleas.length)*10}deg)`;
     step++;
-  }else{
+  } else {
     accept();
   }
 };
 
 /* YES */
-yesBtn.onclick=accept;
+yesBtn.onclick = accept;
 
 function accept(){
-  question.textContent="Thank you for choosing me 💛";
-  img.style.display="block";
-  secret.style.display="block";
-  noBtn.style.display="none";
-  yesBtn.style.display="none";
+  question.textContent = "Thank you for choosing me 💛";
+  img.style.display = "block";
+  secret.style.display = "block";
+  noBtn.style.display = "none";
+  yesBtn.style.display = "none";
 }
 
 /* SECRET */
-secret.onclick=()=>{
-  letter.style.display="block";
-  polaroids.style.display="flex";
-  secret.style.display="none";
+secret.onclick = () => {
+  letter.style.display = "block";
+  polaroids.style.display = "flex";
+  secret.style.display = "none";
 };
 </script>
 
